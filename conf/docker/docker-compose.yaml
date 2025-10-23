@@ -547,54 +547,54 @@ services:
 
 ##### MC-APPLICATION-MANAGER #########################################################################################################################
 
-  mc-application-manager-jenkins:
-    image: bitnami/jenkins:2.462.3
-    user: root
-    container_name: mc-application-manager-jenkins
-    platform: linux/amd64
-    networks:
-      - mc-application-manager-network
-      - mc-web-console-network
-    ports:
-      - target: 8080
-        published: 9800
-        protocol: tcp
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-      - ./container-volume/mc-application-manager/jenkins/:/bitnami/jenkins/home:rw
-    environment:
-      JENKINS_USERNAME: admin
-      JENKINS_PASSWORD: 123456 # Please CHANGE ME
-      JENKINS_PLUGINS: >-
-        workflow-api,
-        swarm,
-        authorize-project,
-        antisamy-markup-formatter,
-        pipeline-github-lib,
-        pipeline-rest-api,
-        git,
-        github-branch-source,
-        gradle,
-        pipeline-model-definition,
-        pipeline-build-step,
-        workflow-aggregator,
-        matrix-project,
-        email-ext,
-        durable-task,
-        checks-api,
-        build-timeout,
-        timestamper,
-        ws-cleanup,
-        ssh-slaves,
-        ssh-agent,
-        publish-over-ssh
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/login" ]
-      interval: 1m
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+#  mc-application-manager-jenkins:
+#    image: bitnami/jenkins:2.462.3
+#    user: root
+#    container_name: mc-application-manager-jenkins
+#    platform: linux/amd64
+#    networks:
+#      - mc-application-manager-network
+#      - mc-web-console-network
+#    ports:
+#      - target: 8080
+#        published: 9800
+#        protocol: tcp
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /usr/bin/docker:/usr/bin/docker
+#      - ./container-volume/mc-application-manager/jenkins/:/bitnami/jenkins/home:rw
+#    environment:
+#      JENKINS_USERNAME: admin
+#      JENKINS_PASSWORD: 123456 # Please CHANGE ME
+#      JENKINS_PLUGINS: >-
+#        workflow-api,
+#        swarm,
+#        authorize-project,
+#        antisamy-markup-formatter,
+#        pipeline-github-lib,
+#        pipeline-rest-api,
+#        git,
+#        github-branch-source,
+#        gradle,
+#        pipeline-model-definition,
+#        pipeline-build-step,
+#        workflow-aggregator,
+#        matrix-project,
+#        email-ext,
+#        durable-task,
+#        checks-api,
+#        build-timeout,
+#        timestamper,
+#        ws-cleanup,
+#        ssh-slaves,
+#        ssh-agent,
+#        publish-over-ssh
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8080/login" ]
+#      interval: 1m
+#      timeout: 5s
+#      retries: 3
+#      start_period: 10s
 
   mc-application-manager-sonatype-nexus:
     image: sonatype/nexus3:latest
@@ -649,53 +649,53 @@ services:
 
 
 ##### MC-WORKFLOW-MANAGER #########################################################################################################################
-
-  mc-workflow-manager-jenkins:
-    image: bitnami/jenkins:2.462.3
-    container_name: mc-workflow-manager-jenkins
-    platform: linux/amd64
-    networks:
-      - mc-workflow-manager-network
-      - mc-web-console-network
-      - mc-infra-manager-network
-    ports:
-      - target: 8080
-        published: 9880
-        protocol: tcp
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-      - ./container-volume/mc-workflow-manager/jenkins/:/bitnami/jenkins/home:rw
-    environment:
-      JENKINS_USERNAME: admin
-      JENKINS_PASSWORD: 123456 # Please CHANGE ME
-      JENKINS_PLUGINS: >-
-        workflow-api,
-        swarm,
-        authorize-project,
-        antisamy-markup-formatter,
-        pipeline-github-lib,
-        pipeline-rest-api,
-        git,
-        github-branch-source,
-        gradle,
-        pipeline-model-definition,
-        pipeline-build-step,
-        workflow-aggregator,
-        matrix-project,
-        email-ext,
-        durable-task,
-        checks-api,
-        build-timeout,
-        timestamper,
-        ws-cleanup,
-        ssh-slaves,
-        ssh-agent,
-        publish-over-ssh
-    user: root
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
-      <<: *default-health-check
+#
+#  mc-workflow-manager-jenkins:
+#    image: bitnami/jenkins:2.462.3
+#    container_name: mc-workflow-manager-jenkins
+#    platform: linux/amd64
+#    networks:
+#      - mc-workflow-manager-network
+#      - mc-web-console-network
+#      - mc-infra-manager-network
+#    ports:
+#      - target: 8080
+#        published: 9880
+#        protocol: tcp
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /usr/bin/docker:/usr/bin/docker
+#      - ./container-volume/mc-workflow-manager/jenkins/:/bitnami/jenkins/home:rw
+#    environment:
+#      JENKINS_USERNAME: admin
+#      JENKINS_PASSWORD: 123456 # Please CHANGE ME
+#      JENKINS_PLUGINS: >-
+#        workflow-api,
+#        swarm,
+#        authorize-project,
+#        antisamy-markup-formatter,
+#        pipeline-github-lib,
+#        pipeline-rest-api,
+#        git,
+#        github-branch-source,
+#        gradle,
+#        pipeline-model-definition,
+#        pipeline-build-step,
+#        workflow-aggregator,
+#        matrix-project,
+#        email-ext,
+#        durable-task,
+#        checks-api,
+#        build-timeout,
+#        timestamper,
+#        ws-cleanup,
+#        ssh-slaves,
+#        ssh-agent,
+#        publish-over-ssh
+#    user: root
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
+#      <<: *default-health-check
 
 
   mc-workflow-manager:
@@ -914,7 +914,7 @@ services:
     env_file:
       - ./conf/mc-observability/mc-observability-infra/.env
     volumes:
-      - ./ansible:/ansible
+      - ./conf/mc-observability/mc-observability-infra/ansible:/ansible
     healthcheck:
       start_period: 120s
       test: 'curl -s http://127.0.0.1:3000/api/ping ; STATUS=`echo $$?` ; if [ $$STATUS != 0 ] && [ $$STATUS != 52 ]; then exit 1 ; fi'
@@ -942,7 +942,7 @@ services:
         chmod 600 /var/lib/rabbitmq/.erlang.cookie && \
         chown -R 132:141 /var/lib/rabbitmq /var/log/rabbitmq
     volumes:
-      - /docker/rabbitmq_data:/var/lib/rabbitmq
+      - ./container-volume/mc-observability/rabbitmq/data:/var/lib/rabbitmq
     user: root
     init: true
 
@@ -1015,13 +1015,13 @@ services:
     image: busybox:stable
     container_name: mc-observability-influx-init-volumes
     restart: no
+    networks:
+      - mc-observability-network
     command: ["sh", "-c", "chown -R 1500:1500 /var/lib/influxdb"]
     volumes:
       - ./container-volume/mc-observability/influxdb/influxdb_data:/var/lib/influxdb
     user: root
     init: true
-    networks:
-      - mc-observability-network
 
   mc-observability-influx:
     image: cloudbaristaorg/mc-observability-influx:edge
@@ -1167,9 +1167,9 @@ services:
     restart: no
     networks:
       - mc-observability-network
-    command: ["sh", "-c", "chown -R 10001:10001 /var/tempo"]
+    command: ["sh", "-c", "chown -R 10001:10001 /etc/tempo"]
     volumes:
-      - ./container-volume/mc-observability/tempo/tempo_data:/var/tempo
+      - ./container-volume/mc-observability/tempo/tempo_data:/etc/tempo
     user: root
     init: true
 
@@ -1198,9 +1198,13 @@ services:
       - TZ=Asia/Seoul
     command: [ "-config.file=/etc/tempo-config.yaml" ]
     volumes:
+      - ./tool/mcc:/app/tool/mcc
       - /etc/localtime:/etc/localtime:ro
       - ./conf/mc-observability/tempo/config.yaml:/etc/tempo-config.yaml
-      - ./container-volume/mc-observability/tempo/tempo_data:/var/tempo
+      - ./container-volume/mc-observability/tempo/tempo_data:/etc/tempo
+    healthcheck:
+      test: [ "CMD", "/app/tool/mcc", "rest", "get", "http://127.0.0.1:3200/ready" ]
+      <<: *default-health-check
 
   mc-observability-grafana-init-volumes:
     image: busybox:stable
@@ -1265,8 +1269,6 @@ services:
         protocol: tcp
     depends_on:
       mc-observability-maria:
-        condition: service_healthy
-      mc-observability-influx:
         condition: service_healthy
     environment:
       - TZ=Asia/Seoul
@@ -1350,6 +1352,7 @@ services:
       - LOKI_HOST=mc-observability-loki
       - LOKI_PORT=3100
     volumes:
+      - ./tool/mcc:/app/tool/mcc
       - ./conf/mc-observability/log-collector:/fluent-bit/etc:ro
       - shared_logs:/logs:ro
     command:
@@ -1357,11 +1360,8 @@ services:
       - -c
       - /fluent-bit/etc/fluent-bit.conf
     healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --spider http://127.0.0.1:2020/api/v1/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+      test: [ "CMD", "/app/tool/mcc", "rest", "get", "http://127.0.0.1:2020/api/v1/health" ]
+      <<: *default-health-check
 
 ##### Remove annotations when using LLM-based log and alarm analysis #####
 #  mc-observability-mcp-grafana:
